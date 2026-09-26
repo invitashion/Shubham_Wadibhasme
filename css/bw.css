@@ -1,8 +1,11 @@
 /* === आशीर्वाद भिंत + घंटा (Blessings Wall + Temple Bell) === */
 /* New, self-contained additions. Does not modify css/s.css */
 
+.bellwrap{text-align:center;margin:0 0 6px}
+.bellhint{font-family:Kalam,cursive;font-size:14.5px;color:var(--soft);margin:2px 0 0}
 .bellbtn{position:relative;display:block;margin:0 auto 4px;background:0 0;border:0;padding:0;cursor:pointer;width:54px;height:54px}
-.bellbtn svg{width:100%;height:100%;transform-origin:50% 10%;filter:drop-shadow(0 3px 6px rgba(0,0,0,.35))}
+.bellbtn svg{width:100%;height:100%;transform-origin:50% 10%;filter:drop-shadow(0 3px 6px rgba(0,0,0,.35));animation:2.6s ease-in-out infinite bwSway}
+@keyframes bwSway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
 .bellbtn.ring svg{animation:.6s ease-in-out 2 bwRing}
 @keyframes bwRing{0%,100%{transform:rotate(0)}20%{transform:rotate(18deg)}40%{transform:rotate(-14deg)}60%{transform:rotate(9deg)}80%{transform:rotate(-5deg)}}
 
