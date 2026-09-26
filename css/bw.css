@@ -1,0 +1,31 @@
+/* === आशीर्वाद भिंत + घंटा (Blessings Wall + Temple Bell) === */
+/* New, self-contained additions. Does not modify css/s.css */
+
+.bellbtn{position:relative;display:block;margin:0 auto 4px;background:0 0;border:0;padding:0;cursor:pointer;width:54px;height:54px}
+.bellbtn svg{width:100%;height:100%;transform-origin:50% 10%;filter:drop-shadow(0 3px 6px rgba(0,0,0,.35))}
+.bellbtn.ring svg{animation:.6s ease-in-out 2 bwRing}
+@keyframes bwRing{0%,100%{transform:rotate(0)}20%{transform:rotate(18deg)}40%{transform:rotate(-14deg)}60%{transform:rotate(9deg)}80%{transform:rotate(-5deg)}}
+
+.bw-fab{position:absolute;top:calc(env(safe-area-inset-top,0px) + 56px);right:12px;z-index:20;width:44px;height:44px;border-radius:50%;border:2px solid var(--gold);background:linear-gradient(135deg,var(--teal),var(--grn));color:#fff;font-size:19px;line-height:1;cursor:pointer;box-shadow:0 6px 16px var(--shadow);animation:3s ease-in-out infinite bwBob}
+@keyframes bwBob{50%{transform:translateY(-4px)}}
+.bw-badge{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;padding:0 4px;border-radius:999px;background:var(--mag);color:#fff;font-size:11px;font-weight:700;line-height:18px;border:2px solid var(--paper)}
+
+.bw-overlay{position:absolute;inset:0;z-index:41;background:rgba(20,10,20,.55);display:none;align-items:center;justify-content:center;padding:14px}
+.bw-overlay.open{display:flex}
+.bw-panel{width:100%;max-width:420px;max-height:88%;background:var(--paper);border:2px solid var(--pur);border-radius:18px;box-shadow:0 20px 50px var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+.bw-head{background:linear-gradient(90deg,var(--mag),var(--pur));color:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;font-family:'Tiro Devanagari Marathi',serif;font-size:19px;flex:none}
+.bw-head button{background:0 0;border:0;color:#fff;font-size:26px;cursor:pointer;line-height:1}
+.bw-body{padding:14px;overflow-y:auto}
+.bw-intro{font-family:'Tiro Devanagari Marathi',serif;font-size:16px;text-align:center;margin:0 0 12px;color:var(--soft);line-height:1.6}
+.bw-form input,.bw-form textarea{width:100%;font:inherit;font-size:16px;padding:9px 12px;border-radius:12px;border:2px solid var(--line);background:var(--paper);color:var(--ink);margin-bottom:8px;resize:vertical}
+.bw-form input:focus,.bw-form textarea:focus{outline:2px solid var(--gold)}
+.bw-form .btn{width:100%;font-size:16px;padding:9px}
+.bw-status{text-align:center;font-size:14.5px;min-height:18px;margin:6px 0 0;color:var(--tg)}
+.bw-status.err{color:#e03131}
+.bw-count{text-align:center;font-family:'Rozha One',serif;font-size:17px;margin:16px 0 8px;color:var(--tm)}
+.bw-wall{display:flex;flex-direction:column;gap:10px}
+.bw-card{border:2px solid var(--gold);border-radius:14px;padding:10px 12px;background:linear-gradient(135deg,rgba(194,37,92,.06),rgba(11,114,133,.06));animation:.5s ease both bwIn}
+@keyframes bwIn{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
+.bw-card b{font-family:'Rozha One',serif;color:var(--tm);font-size:16.5px}
+.bw-card p{margin:4px 0 0;font-size:15.5px;line-height:1.5;word-wrap:break-word}
+.bw-empty{text-align:center;color:var(--soft);font-family:Kalam,cursive;font-size:16px}
