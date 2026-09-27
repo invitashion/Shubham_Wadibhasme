@@ -32,3 +32,14 @@
 .bw-card b{font-family:'Rozha One',serif;color:var(--tm);font-size:16.5px}
 .bw-card p{margin:4px 0 0;font-size:15.5px;line-height:1.5;word-wrap:break-word}
 .bw-empty{text-align:center;color:var(--soft);font-family:Kalam,cursive;font-size:16px}
+
+/* === आमचे क्षणचित्र (couple photo + video page) === */
+.momentsplit{position:relative;max-width:320px;margin:18px auto 8px;aspect-ratio:900/969;border-radius:18px;overflow:hidden;border:4px solid var(--gold);box-shadow:0 10px 26px var(--shadow)}
+.mhalf{position:absolute;top:0;bottom:0;width:50%;background-image:url(../assets/couple.jpg);background-size:200% 100%;background-repeat:no-repeat}
+.mh-l{left:0;background-position:left center;animation:2.8s cubic-bezier(.16,.7,.2,1) .3s both meetL}
+.mh-r{right:0;background-position:right center;animation:2.8s cubic-bezier(.16,.7,.2,1) .3s both meetR}
+@keyframes meetL{from{transform:translateX(-115%)}to{transform:translateX(0)}}
+@keyframes meetR{from{transform:translateX(115%)}to{transform:translateX(0)}}
+.momentvideo{margin:14px auto 0;max-width:340px}
+.momentvideo video{width:100%;border-radius:14px;border:3px solid var(--teal);display:block;background:#000}
+.videofallback{text-align:center;font-family:Kalam,cursive;font-size:16px;color:var(--soft);border:2px dashed var(--pur);border-radius:14px;padding:20px 14px;margin:0}
