@@ -1,4 +1,4 @@
-/* === आशीर्वाद भिंत + घंटा (Blessings Wall + Temple Bell) ===
+/* === आशीर्वाद भिंत + आमची प्रेमकहाणी (Blessings Wall + Couple Story page) ===
    Self-contained. Does not touch js/a.js.
    Blessings are stored in the SAME Firebase project already used for
    visit-tracking, in a new "blessings" collection.
@@ -140,32 +140,45 @@
     });
   }
 
-  /* --- घंटा (temple bell) --- */
-  var bell = document.getElementById("bellBtn");
-  if (bell) {
-    bell.addEventListener("click", function (e) {
-      e.stopPropagation();
-      bell.classList.add("ring");
-      try {
-        var Ctx = window.AudioContext || window.webkitAudioContext;
-        var ctx = new Ctx();
-        var t0 = ctx.currentTime;
-        [660, 990, 1320].forEach(function (freq, i) {
-          var osc = ctx.createOscillator();
-          var gain = ctx.createGain();
-          osc.type = "sine";
-          osc.frequency.setValueAtTime(freq, t0);
-          gain.gain.setValueAtTime(0, t0);
-          gain.gain.linearRampToValueAtTime(0.18 / (i + 1), t0 + 0.02);
-          gain.gain.exponentialRampToValueAtTime(0.001, t0 + 1.2);
-          osc.connect(gain);
-          gain.connect(ctx.destination);
-          osc.start(t0);
-          osc.stop(t0 + 1.3);
-        });
-        setTimeout(function () { try { ctx.close(); } catch (e) {} }, 1600);
-      } catch (err) { /* audio not available, ritual still looks/feels right */ }
-      setTimeout(function () { bell.classList.remove("ring"); }, 1300);
+  /* --- आमची प्रेमकहाणी: replay the groom/bride "meet in the middle" animation
+     every time this page becomes the active page. The site's pager keeps every
+     page in the DOM (for the page-curl effect) and often pre-renders the next
+     page as "under" before it's ever seen, so a plain CSS auto-play animation
+     only ever fires once, off-screen. This restarts it on every visit. --- */
+  var momentPage = document.querySelector('section[aria-label="आमची प्रेमकहाणी"]');
+  var mhL = document.querySelector("#momentSplit .mh-l");
+  var mhR = document.querySelector("#momentSplit .mh-r");
+  var mHeart = document.querySelector("#momentSplit .momentheart");
+  var mNames = document.querySelector(".momentnames");
+
+  function replayMoment() {
+    [mhL, mhR, mHeart, mNames].forEach(function (el) {
+      if (!el) return;
+      el.style.animation = "none";
+      void el.offsetWidth; /* force reflow so the browser "forgets" the old run */
+      el.style.animation = "";
     });
+  }
+
+  if (momentPage && mhL && mhR) {
+    if (momentPage.classList.contains("active")) replayMoment();
+    var momentObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (m) {
+        if (m.attributeName === "class" && momentPage.classList.contains("active")) {
+          replayMoment();
+        }
+      });
+    });
+    momentObserver.observe(momentPage, { attributes: true, attributeFilter: ["class"] });
+  }
+
+  /* --- व्हिडिओ (graceful placeholder until assets/couple.mp4 exists) --- */
+  var vid = document.getElementById("coupleVid");
+  var vidFallback = document.getElementById("videoFallback");
+  if (vid && vidFallback) {
+    vid.addEventListener("error", function () {
+      vid.style.display = "none";
+      vidFallback.hidden = false;
+    }, true);
   }
 })();
