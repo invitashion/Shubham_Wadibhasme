@@ -161,12 +161,16 @@
   }
 
   if (momentPage && mhL && mhR) {
-    if (momentPage.classList.contains("active")) replayMoment();
+    var momentWasActive = false;
+    function checkMomentActive() {
+      var isActive = momentPage.classList.contains("active");
+      if (isActive && !momentWasActive) replayMoment();
+      momentWasActive = isActive;
+    }
+    checkMomentActive();
     var momentObserver = new MutationObserver(function (mutations) {
       mutations.forEach(function (m) {
-        if (m.attributeName === "class" && momentPage.classList.contains("active")) {
-          replayMoment();
-        }
+        if (m.attributeName === "class") checkMomentActive();
       });
     });
     momentObserver.observe(momentPage, { attributes: true, attributeFilter: ["class"] });
