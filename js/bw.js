@@ -185,4 +185,29 @@
       vidFallback.hidden = false;
     }, true);
   }
+
+  /* play automatically the moment this page becomes active; pause when you
+     leave it, so it doesn't keep playing silently in the background */
+  var videoPage = document.querySelector('section[aria-label="आमचे क्षणचित्र"]');
+  if (vid && videoPage) {
+    var videoWasActive = false;
+    function checkVideoActive() {
+      var isActive = videoPage.classList.contains("active");
+      if (isActive && !videoWasActive) {
+        vid.currentTime = 0;
+        var p = vid.play();
+        if (p && p.catch) p.catch(function () { /* browser blocked autoplay; controls still let them tap play */ });
+      } else if (!isActive && videoWasActive) {
+        vid.pause();
+      }
+      videoWasActive = isActive;
+    }
+    checkVideoActive();
+    var videoObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (m) {
+        if (m.attributeName === "class") checkVideoActive();
+      });
+    });
+    videoObserver.observe(videoPage, { attributes: true, attributeFilter: ["class"] });
+  }
 })();
